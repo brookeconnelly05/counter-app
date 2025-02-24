@@ -124,9 +124,17 @@ export class CounterApp extends DDDSuper(I18NMixin(LitElement)) {
 
   // Lit render the HTML
   render() {
+    let counterClass = "";
+  if (this.count === this.min) {
+    counterClass = "min";
+  } else if (this.count === this.max) {
+    counterClass = "max";
+  }
     return html`
     <confetti-container id="confetti" class="wrapper">
-<div class="counter ${this.count === this.min ? 'min' : this.count === this.max ? 'max' : ''}">${this.count} </div>
+<div class="counter ${counterClass}">
+  ${this.count}
+</div>
 <div class="buttons">
   <button @click= "${this.increase}" ?disabled="${this.count === this.max}">Add one </button>
   <button @click= "${this.decrease}" ?disabled="${this.count === this.min}">Subtract one </button>
